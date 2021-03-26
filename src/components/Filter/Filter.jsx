@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/contacts/contacts-actions';
 import style from './Filter.module.css';
 
-const Filter = ({ initialValue = '', onFilterChange }) => {
+const Filter = ({ value, onChange }) => {
   return (
     <div className={style.wrapper}>
       <label className={style.label}>
@@ -10,10 +12,8 @@ const Filter = ({ initialValue = '', onFilterChange }) => {
           className={style.input}
           type="text"
           name="name"
-          value={initialValue}
-          onChange={event => {
-            onFilterChange(event.target.value);
-          }}
+          value={value}
+          onChange={onChange}
         />
       </label>
     </div>
@@ -21,8 +21,16 @@ const Filter = ({ initialValue = '', onFilterChange }) => {
 };
 
 Filter.propTypes = PropTypes.shape({
-  initialValue: PropTypes.string,
-  onFilterChange: PropTypes.func,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 }).isRequired;
 
-export default Filter;
+const mapStateToProps = state => ({
+  value: state.contacts.filter,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onChange: e => dispatch(actions.filterContacts(e.target.value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

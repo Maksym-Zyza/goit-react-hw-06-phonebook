@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/contacts/contacts-actions';
 import PropTypes from 'prop-types';
 import style from './ContactForm.module.css';
 
@@ -27,7 +29,6 @@ class ContactForm extends Component {
     e.preventDefault();
     const { name, number } = this.state;
 
-    // console.log(this.state);
     this.props.onSubmit({ name, number, id: uuidv4() });
     this.resetForm();
   };
@@ -71,4 +72,8 @@ class ContactForm extends Component {
   }
 }
 
-export default ContactForm;
+const mapDispatchToProps = dispatch => ({
+  onSubmit: obj => dispatch(actions.addContact(obj)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);
