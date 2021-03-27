@@ -30,7 +30,6 @@ ContactList.propTypes = PropTypes.shape({
 }).isRequired;
 
 const contactListFilter = (items, filter) => {
-  console.log(items);
   return items.filter(({ name }) =>
     name.toLowerCase().includes(filter.toLowerCase()),
   );

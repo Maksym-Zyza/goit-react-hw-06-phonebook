@@ -28,8 +28,12 @@ class ContactForm extends Component {
   handleSabmit = e => {
     e.preventDefault();
     const { name, number } = this.state;
+    const { contacts } = this.props;
 
-    this.props.onSubmit({ name, number, id: uuidv4() });
+    if (contacts.some(contact => contact.name === name)) {
+      return alert(`Name "${name}" already exists, please enter another name.`);
+    } else this.props.onSubmit({ name, number, id: uuidv4() });
+
     this.resetForm();
   };
 
@@ -72,8 +76,12 @@ class ContactForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  contacts: state.contacts.items,
+});
+
 const mapDispatchToProps = dispatch => ({
   onSubmit: obj => dispatch(actions.addContact(obj)),
 });
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
