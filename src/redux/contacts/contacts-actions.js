@@ -1,5 +1,4 @@
 import { createAction } from '@reduxjs/toolkit';
-// import types from './contacts-types';
 
 export const addContact = createAction('Contact/add');
 
@@ -8,6 +7,8 @@ export const deleteContact = createAction('Contact/delete');
 export const filterContacts = createAction('Contact/filter');
 
 // =========== До Redux Tookit =========
+// import types from './contacts-types';
+
 // export const addContact = obj => ({
 //   type: types.ADD,
 //   payload: { ...obj },

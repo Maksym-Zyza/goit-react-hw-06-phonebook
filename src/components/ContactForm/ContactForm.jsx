@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/contacts/contacts-actions';
 import PropTypes from 'prop-types';
-import style from './ContactForm.module.css';
+import css from './ContactForm.module.css';
 
 class ContactForm extends Component {
   static propTypes = {
@@ -38,38 +38,41 @@ class ContactForm extends Component {
   };
 
   render() {
+    const { contacts } = this.props;
     return (
       <>
         <div>
+          <h1 className={css.title}>Phonebook</h1>
           <form
-            className={style.form}
+            className={css.form}
             autoComplete="off"
             onSubmit={this.handleSabmit}
           >
-            <label className={style.label}>
+            <label className={css.label}>
               Name:
               <input
                 type="text"
                 name="name"
                 value={this.state.name}
                 onChange={this.handelChange}
-                className={style.input}
+                className={css.input}
               />
             </label>
-            <label className={style.label}>
+            <label className={css.label}>
               Number:
               <input
                 type="tel"
                 name="number"
                 value={this.state.number}
                 onChange={this.handelChange}
-                className={style.input}
+                className={css.input}
               />
             </label>
-            <button type="submit" className={style.btn}>
+            <button type="submit" className={css.btn}>
               Add contact
             </button>
           </form>
+          <h2 className={css.title}>Contacts ({contacts.length})</h2>
         </div>
       </>
     );

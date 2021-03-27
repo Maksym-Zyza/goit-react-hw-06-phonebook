@@ -1,21 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
 // import Counter from './components/Counter';
 import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
 import ContactForm from './components/ContactForm/ContactForm';
-import style from './App.module.css';
-import { connect } from 'react-redux';
+import Nothing from './components/Nothing';
+import css from './App.module.css';
 
 const App = ({ contacts }) => {
   return (
-    <div className={style.wrapper}>
-      {/* <h1 className={style.title}>Counter</h1>
+    <div className={css.wrapper}>
+      {/* <h1 className={css.title}>Counter</h1>
         <Counter /> */}
 
-      <h1 className={style.title}>Phonebook</h1>
       <ContactForm />
 
-      <h2 className={style.subtitle}>Contacts</h2>
+      {contacts.length === 0 && <Nothing />}
+
       {contacts.length > 1 && <Filter />}
 
       {<ContactList />}

@@ -1,7 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import * as actions from './contacts-actions';
-// import types from './contacts-types';
 
 const items = createReducer([], {
   [actions.addContact]: (state, { payload }) => [...state, payload],
@@ -19,6 +18,8 @@ export default combineReducers({
 });
 
 // =========== До Redux Tookit =========
+// import types from './contacts-types';
+
 // const items = (state = [], { type, payload }) => {
 //   switch (type) {
 //     case types.ADD:
